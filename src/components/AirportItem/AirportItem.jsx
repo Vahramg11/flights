@@ -3,8 +3,6 @@ import React from "react";
 const AirportItem = ({ airport }) => {
     console.log(airport);
     
-//   console.log(airport.legs[0].carriers.marketing[0].name);
-
   return (
     <>
       {
@@ -43,12 +41,12 @@ const AirportItem = ({ airport }) => {
               </h5>
               <p>{airport.legs[0].destination.name}</p>
             </div>
-            <div className="flex flex-col items-center gap-1 p-6 bg-[#FAE6E1] rounded-r-xl md:w-48">
+            <div className="flex flex-col items-center gap-1 p-6 bg-blue-100 rounded-r-xl md:w-48">
               <p className="mt-0 font-semibold">
                 ${airport.pricingOptions[0].price.amount}
               </p>
               <div className="mt-4">
-                <button className="block px-4 py-2 mb-2 text-sm text-white bg-orange-500 rounded-md">
+                <button className="block px-4 py-2 mb-2 text-sm text-white bg-blue-500 rounded-md">
                   Book Now
                 </button>
               </div>

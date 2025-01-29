@@ -10,7 +10,6 @@ const airportSlice = createSlice({
 
   reducers: {
     change_airports(state, action) {
-      alert();
       state.airports = action.payload;
     },
   },

@@ -76,6 +76,8 @@ const Search = () => {
     setToAirports([]);
   };
 
+  const [loading, setLoading] = useState(false);
+
   const fetchAirportIDs = async (airport, setAirport) => {
     const { data } = await axios.get(
       "https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport",
@@ -95,6 +97,8 @@ const Search = () => {
   };
 
   const popoular_flight = async () => {
+    setLoading(true);
+
     const { data } = await axios.get(
       "https://sky-scrapper.p.rapidapi.com/api/v2/flights/searchFlightsWebComplete",
       {
@@ -117,8 +121,9 @@ const Search = () => {
     );
     console.log("popoular_flight", data);
     if (data.status) {
-      dispatch(change_airports(data.data.itineraries));
+      setLoading(false);
       navigate("flights");
+      dispatch(change_airports(data.data.itineraries));
     }
   };
 
@@ -245,9 +250,32 @@ const Search = () => {
           onClick={() => {
             main_search();
           }}
-          className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Search Flights
+            <span>Search Flights</span>
+          {loading && <div className="flex gap-2 justify-center">
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8z"
+              ></path>
+            </svg>
+          </div>
+}
         </button>
       </div>
     </>
